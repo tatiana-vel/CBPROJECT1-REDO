@@ -5,9 +5,17 @@ function refreshPage(){
 } 
 
 function searchApi() {
-    let apiUrl= "www.thecocktaildb.com/api/json/v1/1/random.php"
+    let apiUrl= "https://www.thecocktaildb.com/api/json/v1/1/random.php"
     
     fetch(apiUrl)
+    .then(response => {
+      // Check if the response status is OK (status code 200)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      // Parse the response JSON
+      return response.json();
+    })
       .then(data=> {
         const Cocktails= data.drinks[0];
         console.log(Cocktails)
